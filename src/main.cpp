@@ -2,56 +2,47 @@
 /**
  * @file main.cpp
  * @brief Embedded RGB LED Control (Digital + PWM)
- * @author YOUR_NAME
- * @date YYYY-MM-DD
+ * @author Harsh Chaudhary
+ * @date 2026-02-19
  *
  * @details
  * Controls RGB LED using digital ON/OFF
  * and analog PWM brightness control.
  */
 
- // TODO 1:
- // Define RED pin (Use 9)
+ const int RED_PIN = 9;
 
- // TODO 2:
- // Define GREEN pin (Use 10)
+ const int GREEN_PIN = 10;
 
- // TODO 3:
- // Define BLUE pin (Use 11)
+ const int BLUE_PIN = 11;
 
 void setup() {
-
-    // TODO 4:
-    // Initialize Serial communication (9600 baud)
-
-    // TODO 5:
-    // Configure RGB pins as OUTPUT
-
-    // TODO 6:
-    // Print initialization message
+    Serial.begin(9600);
+    pinMode(RED_PIN, OUTPUT);
+    pinMode(GREEN_PIN, OUTPUT);
+    pinMode(BLUE_PIN, OUTPUT);
+    Serial.println("RGB System Initialized");
 }
 
 void loop() {
-
     // -------- DIGITAL MODE --------
+    digitalWrite(RED_PIN, HIGH);
+    delay(1000); // Wait to see the color
 
-    // TODO 7:
-    // Turn ON red (digital HIGH)
-
-    // TODO 8:
-    // Turn OFF red
+    digitalWrite(RED_PIN, LOW);
+    delay(500);
 
     // -------- ANALOG (PWM) MODE --------
+    analogWrite(RED_PIN, 128); // 50% brightness
 
-    // TODO 9:
-    // Set RED brightness using analogWrite()
+    analogWrite(GREEN_PIN, 0); // OFF
 
-    // TODO 10:
-    // Set GREEN brightness using analogWrite()
+    analogWrite(BLUE_PIN, 128); // 50% brightness (Makes Purple)
 
-    // TODO 11:
-    // Set BLUE brightness using analogWrite()
-
-    // TODO 12:
-    // Add delay for visible transition
+    delay(1000);
+    
+    // Reset for next loop
+    analogWrite(RED_PIN, 0);
+    analogWrite(BLUE_PIN, 0);
+    delay(500);
 }
